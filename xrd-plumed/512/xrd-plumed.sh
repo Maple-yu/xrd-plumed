@@ -9,7 +9,7 @@ do
 	for j in $list1;
 	do
 		echo "analyse the ${j}_N${i}nm.xyz"
-		## plumed driver --plumed ./${i}/plumed-${j}.dat --ixyz ./${i}/${j}_N${i}nm.xyz
+		mpirun -np 4 plumed driver --plumed ./${i}/plumed-${j}.dat --ixyz ./${i}/${j}_N${i}nm.xyz
 	done
 done
 echo "All job done!"
