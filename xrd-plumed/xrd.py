@@ -16,24 +16,25 @@ def plotxrd(atoms,fignum):
 
     plt.subplot(4,1,fignum)
     xrd = np.loadtxt('./%a/xrd.txt'%(atoms))
+    ## set the start angle=0.05i + 5
     xrd = xrd[100:,:]
-
-    plt.title('%a atoms'%(atoms))
     my_x_ticks = np.arange(10,120,5)
     plt.xticks(my_x_ticks)
+    
+    plt.title('%a atoms'%(atoms))
     plt.xlabel('2Theta')
     plt.ylabel('intensity')
     plt.ylim(-0.05,0.16)
-    xrd[:,0]=2*xrd[:,0]
-    #l1,=plt.plot(xrd[:,0],xrd[:,1],color='red')
+    l1,=plt.plot(xrd[:,0],xrd[:,1],color='red')
     l2,=plt.plot(xrd[:,0],xrd[:,2],color='blue')
-    #l3,=plt.plot(xrd[:,0],xrd[:,3],color='green')
-    #plt.legend(handles=[l1,l2,l3],labels=['liq','dia','gra'],loc='best')
+    l3,=plt.plot(xrd[:,0],xrd[:,3],color='green')
+    plt.legend(handles=[l1,l2,l3],labels=['liq','dia','gra'],loc='best')
 
 plt.figure(figsize=(8,20),dpi=300)
 plt.subplots_adjust(wspace =0, hspace =0.2)
 j = 1
 for i in [512,4096,13824,32768]:
+    getdata(i)
     plotxrd(i,j)
     j = j + 1
 
